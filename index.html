@@ -1,50 +1,235 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nícolas Emanuel | Portfólio Completo</title>
-  <link href="assets/css/main.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nícolas Emanuel | Portfólio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f5;
+      --red: #C00000;
+      --gold: #FFD700;
+      --primary: #00ffff;
+      --accent: #ffd700;
+      --bg-skill: #020b1b;
+      --neon-glow: 0 0 8px rgba(255,255,0,0.8);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body, html { background: var(--black); color: var(--white); overflow-x: hidden; }
+
+    /* HERO SECTION */
+    section.hero {
+      position: relative; height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.04) 0%, rgba(0,0,0,1) 100%);
+      overflow: hidden;
+    }
+    section.hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at center, rgba(100,100,100,0.1), transparent 70%);
+      z-index: 0;
+    }
+    section.hero .shape {
+      position: absolute; width: 300px; height: 300px;
+      background: conic-gradient(from 45deg, var(--gold), var(--red), var(--gold));
+      border-radius: 20%; transform-style: preserve-3d;
+      animation: rotateShape 12s linear infinite; opacity: 0.25; z-index: 0;
+    }
+    section.hero .shape:nth-of-type(1) { top: 15%; left: 12%; }
+    section.hero .shape:nth-of-type(2) { top: 60%; left: 75%; transform: scale(0.8) rotateX(180deg); }
+    @keyframes rotateShape {
+      0% { transform: rotateX(0) rotateY(0); }
+      100% { transform: rotateX(360deg) rotateY(360deg); }
+    }
+    .hero-content {
+      position: relative; z-index: 1; text-align: center; max-width: 900px; padding: 2rem;
+    }
+    .hero-content .profile-photo {
+      width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--gold);
+      object-fit: cover; margin: 0 auto 1rem;
+    }
+    .hero-content h1 {
+      font-size: 4rem; font-weight: 900; margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--gold), var(--white));
+      -webkit-background-clip: text; color: transparent;
+    }
+    .hero-content p {
+      font-size: 1.3rem; color: var(--white); margin: 0 auto 2.5rem; max-width: 600px;
+    }
+    .hero-content .btn {
+      display: inline-block; background: var(--red); color: var(--white);
+      padding: 1rem 2rem; border-radius: 50px; font-weight: 600;
+      border: 2px solid transparent; transition: 0.3s;
+    }
+    .hero-content .btn:hover {
+      background: transparent; border-color: var(--red); transform: translateY(-5px);
+    }
+
+    /* RESTANTE DO CSS (SOBRE, SKILLS, VÍDEOS, CONTATO) */
+    section.about {
+      position: relative; padding: 6rem 2rem; text-align: center;
+    }
+    section.about h2 {
+      font-size: 3rem; color: var(--gold); margin-bottom: 1.5rem;
+    }
+    section.about p {
+      max-width: 800px; margin: 0 auto 2rem; font-size: 1.2rem; line-height: 1.8; color: var(--white);
+    }
+    .about-shape1, .about-shape2 {
+      position: absolute; width: 300px; height: 300px;
+      background: conic-gradient(from 90deg, var(--gold), var(--red), var(--gold));
+      border-radius: 20%; opacity: 0.25; transform-style: preserve-3d;
+      animation: rotateShape 20s linear infinite; z-index: 0;
+    }
+    .about-shape1 { top: 5%; left: 5%; }
+    .about-shape2 { bottom: 10%; right: 5%; }
+
+    section.skills {
+      position: relative; background: var(--bg-skill); padding: 80px 20px; overflow: hidden;
+    }
+    #skillCanvas { position: absolute; inset: 0; z-index: 0; }
+    section.skills h1 {
+      position: relative; z-index: 1; text-align: center; margin-bottom: 60px; font-size: 3.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; color: transparent;
+      text-shadow: var(--neon-glow); letter-spacing: -2px;
+    }
+    .skill-list {
+      position: relative; z-index: 1; max-width: 800px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .skill-item {
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(8px);
+      padding: 1rem; border-radius: 12px; display: flex; align-items: center;
+      justify-content: space-between; transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer; border: 1px solid transparent;
+    }
+    .skill-item:hover {
+      transform: translateX(10px); box-shadow: var(--neon-glow);
+    }
+    .skill-item span {
+      color: var(--gold); font-size: 1.1rem; font-weight: 500;
+    }
+
+    section.videos {
+      background: var(--black); padding: 80px 20px;
+    }
+    section.videos h1 {
+      text-align: center; color: var(--gold); margin-bottom: 40px;
+      text-shadow: 0 0 10px rgba(255,215,0,0.7);
+    }
+    .video-section {
+      max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px;
+    }
+    .video-card {
+      position: relative; padding: 20px; border-radius: 20px;
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(12px);
+      overflow: hidden; transition: 0.4s;
+    }
+    .video-card::before {
+      content: ''; position: absolute; inset: -4px;
+      background: linear-gradient(90deg, rgba(255,215,0,0.8), rgba(255,0,0,0.8), rgba(255,215,0,0.8));
+      filter: blur(25px); border-radius: 22px; opacity: 0.6; z-index: -1;
+      animation: glow 6s linear infinite;
+    }
+    .video-card:hover { transform: translateY(-8px) scale(1.02); }
+    .video-card iframe { width: 100%; height: 315px; border-radius: 12px; border: none; }
+
+    section.contact {
+      position: relative; height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden; background: var(--black);
+    }
+    #bgCanvas, #confettiCanvas { position: absolute; inset: 0; z-index: 0; }
+    .contact-content {
+      position: relative; z-index: 1; display: flex; flex-direction: column; gap: 20px;
+    }
+    .contact-content h1 {
+      font-size: 4rem; color: var(--white);
+    }
+    .contact-content h1 span { color: var(--red); }
+    .contact-content p {
+      max-width: 700px; margin: 0 auto; font-size: 1.2rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .contact-content .buttons {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .contact-content a.button {
+      background: var(--red); color: #fff; border: 2px solid var(--red);
+      padding: 15px 30px; border-radius: 40px; font-size: 1rem; font-weight: bold;
+      transition: 0.3s; box-shadow: 0 0 20px rgba(255,0,0,0.5);
+    }
+    .contact-content a.button:hover {
+      background: darkred; transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(255,0,0,0.8);
+    }
+  </style>
 </head>
 <body>
 
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <section class="hero" id="hero">
-    <div class="shape"></div><div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
     <div class="hero-content">
-      <img src="assets/img/profile.jpg" class="profile-photo" alt="Nícolas Emanuel">
+      <img src="profile.jpg" class="profile-photo" alt="Nícolas Emanuel">
       <h1>NÍCOLAS EMANUEL</h1>
       <p>Eu construo o seu império digital através da tecnologia, design e estratégia.</p>
       <a href="https://wa.me/5581984027098" class="btn">WhatsApp</a>
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ABOUT SECTION -->
   <section class="about" id="sobre">
     <h2>Sobre Mim</h2>
-    <p>[... seu texto completo ...]</p>
-    <div class="about-shape1"></div><div class="about-shape2"></div>
+    <p>
+      Sou Nicolas Emanuel, desenvolvedor, estrategista digital e designer de interfaces. Aos 19 anos, acumulo uma bagagem que muitos profissionais não conquistam em uma década. Minha trajetória começou de forma pouco convencional: ainda no ensino médio, transformei uma obsessão pessoal em produtividade e fundei minha primeira empresa, desenvolvendo websites, e-commerces e estruturas digitais que transcendem o padrão comum.
+
+      Desde então, refinei minha atuação nas áreas de desenvolvimento front-end, back-end, automação, design, UX/UI, integração de sistemas e performance digital. Domínio pleno em HTML, CSS, JavaScript, Python, Java e modelagem 3D aplicada à web. Entrego projetos com uma velocidade que desafia a lógica, sem abrir mão de uma estética sofisticada e de uma engenharia digital precisa.
+
+      Ao longo da minha trajetória, criei uma inteligência artificial funcional em apenas 7 dias, do zero, utilizando exclusivamente Python e bibliotecas open source. Desenvolvi arquiteturas web robustas, microsites ultra-performáticos e plataformas responsivas que atendem clientes no Brasil, Canadá, Irã, Estados Unidos e outros mercados globais.
+
+      O que me diferencia não é apenas a capacidade técnica, mas a interseção entre design de altíssimo padrão, engenharia de software e visão estratégica de negócios. Eu não entrego apenas sites. Eu projeto estruturas digitais que geram autoridade, conversão e crescimento exponencial.
+
+      Se você procura algo comum, há milhares por aí. Se busca excelência, bem-vindo.
+    </p>
+    <div class="about-shape1"></div>
+    <div class="about-shape2"></div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- SKILLS SECTION -->
   <section class="skills" id="skills">
     <canvas id="skillCanvas"></canvas>
     <h1>Competências Técnicas</h1>
     <ul class="skill-list">
-      <!-- Sua lista de skills -->
+      <li class="skill-item"><span>HTML5 & CSS3 Profissional</span></li>
+      <li class="skill-item"><span>JavaScript & ES6+</span></li>
+      <li class="skill-item"><span>Python (Automação & IA)</span></li>
+      <li class="skill-item"><span>Java & Arquitetura de Sistemas</span></li>
+      <li class="skill-item"><span>UX/UI Design Estratégico</span></li>
+      <li class="skill-item"><span>Motion Design & Animações</span></li>
+      <li class="skill-item"><span>Modelagem 3D Web</span></li>
+      <li class="skill-item"><span>E-commerce & SaaS</span></li>
+      <li class="skill-item"><span>SEO & Performance</span></li>
+      <li class="skill-item"><span>Growth Hacking & Automação de Marketing</span></li>
     </ul>
   </section>
 
-  <!-- VIDEOS -->
+  <!-- VIDEOS SECTION -->
   <section class="videos" id="videos">
     <h1>Meus Projetos em Vídeo</h1>
     <div class="video-section">
-      <!-- Seus vídeos -->
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/TwTOXKmdUqo" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/2KBmrBWp75E" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/iXEuhfwF_Hc" allowfullscreen></iframe></div>
+      <div class="video-card"><iframe src="https://www.youtube.com/embed/pnjZPTqjsLU" allowfullscreen></iframe></div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT SECTION -->
   <section class="contact" id="contact">
     <canvas id="bgCanvas"></canvas>
     <div class="contact-content">
@@ -58,6 +243,105 @@
     <canvas id="confettiCanvas"></canvas>
   </section>
 
-  <script type="module" src="assets/js/main.js"></script>
+  <script>
+    // SKILLS: partículas e linhas de constelação
+    const skCanvas = document.getElementById('skillCanvas'), skCtx = skCanvas.getContext('2d');
+    let skParts = [];
+    function initSK(){
+      skCanvas.width = window.innerWidth; skCanvas.height = window.innerHeight;
+      skParts = Array.from({length:60},()=>({
+        x:Math.random()*skCanvas.width,
+        y:Math.random()*skCanvas.height,
+        size:Math.random()*2+1,
+        dx:(Math.random()-0.5)*0.5,
+        dy:(Math.random()-0.5)*0.5
+      }));
+    }
+    function animSK(){
+      skCtx.clearRect(0,0,skCanvas.width,skCanvas.height);
+      skParts.forEach((p,i)=>{
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>skCanvas.width) p.dx*=-1;
+        if(p.y<0||p.y>skCanvas.height) p.dy*=-1;
+        skCtx.beginPath(); skCtx.arc(p.x,p.y,p.size,0,2*Math.PI);
+        skCtx.fillStyle = 'rgba(255,255,255,0.6)'; skCtx.fill();
+        for(let j=i+1;j<skParts.length;j++){
+          const q = skParts[j];
+          const dist = (p.x-q.x)**2 + (p.y-q.y)**2;
+          if(dist<10000){
+            skCtx.strokeStyle = `rgba(255,255,255,${1 - dist/10000})`;
+            skCtx.lineWidth = 0.8;
+            skCtx.beginPath(); skCtx.moveTo(p.x,p.y); skCtx.lineTo(q.x,q.y); skCtx.stroke();
+          }
+        }
+      });
+      requestAnimationFrame(animSK);
+    }
+    initSK(); animSK(); window.addEventListener('resize',initSK);
+
+    // CONTACT: background partículas
+    const bgC = document.getElementById('bgCanvas'), bgCtx = bgC.getContext('2d');
+    let bgP = [];
+    function initBG(){
+      bgC.width=window.innerWidth; bgC.height=window.innerHeight;
+      bgP = Array.from({length:80},()=>({
+        x:Math.random()*bgC.width,
+        y:Math.random()*bgC.height,
+        size:Math.random()*2+1,
+        dx:(Math.random()-0.5)*0.5,
+        dy:(Math.random()-0.5)*0.5,
+        color:['#FFD700','#FF0000','#FFFFFF','#000000'][Math.floor(Math.random()*4)]
+      }));
+    }
+    function animBG(){
+      bgCtx.clearRect(0,0,bgC.width,bgC.height);
+      bgP.forEach(p=>{
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0)p.x=bgC.width; if(p.x>bgC.width)p.x=0;
+        if(p.y<0)p.y=bgC.height; if(p.y>bgC.height)p.y=0;
+        bgCtx.beginPath(); bgCtx.arc(p.x,p.y,p.size,0,2*Math.PI);
+        bgCtx.fillStyle=p.color; bgCtx.fill();
+      });
+      requestAnimationFrame(animBG);
+    }
+    initBG(); animBG(); window.addEventListener('resize',initBG);
+
+    // CONFETTI: ao clicar botões
+    const cfC = document.getElementById('confettiCanvas'), cfCtx = cfC.getContext('2d');
+    let confs = [];
+    function initCF(){ cfC.width=window.innerWidth; cfC.height=window.innerHeight; }
+    function startConfetti(){
+      for(let i=0;i<150;i++){
+        confs.push({
+          x:Math.random()*cfC.width,
+          y:Math.random()*-cfC.height,
+          size:Math.random()*8+4,
+          dx:(Math.random()-0.5)*5,
+          dy:Math.random()*8+4,
+          rot:Math.random()*360,
+          spin:(Math.random()-0.5)*10,
+          color:['#FFD700','#FF0000','#FFFFFF','#000000'][Math.floor(Math.random()*4)]
+        });
+      }
+      setTimeout(()=>window.open('https://wa.me/5581984027098','_blank'),1000);
+    }
+    function animCF(){
+      cfCtx.clearRect(0,0,cfC.width,cfC.height);
+      confs.forEach((c,i)=>{
+        c.x+=c.dx; c.y+=c.dy; c.rot+=c.spin;
+        cfCtx.save(); cfCtx.translate(c.x,c.y);
+        cfCtx.rotate(c.rot*Math.PI/180);
+        cfCtx.fillStyle=c.color;
+        cfCtx.fillRect(-c.size/2,-c.size/2,c.size,c.size);
+        cfCtx.restore();
+      });
+      confs = confs.filter(c=>c.y<cfC.height+20);
+      requestAnimationFrame(animCF);
+    }
+    initCF(); animCF(); window.addEventListener('resize',initCF);
+
+    // ADD EVENT
+    document.querySelector('.contact-content .buttons .button').addEventListener('click', startConfetti);
+  </script>
 </body>
-  </html>
+</html>
