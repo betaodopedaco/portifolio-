@@ -1,0 +1,59 @@
+:root {
+  --black: #0a0a0a;
+  --white: #f5f5f5;
+  --red: #C00000;
+  --gold: #FFD700;
+  --primary: #00ffff;
+  --accent: #ffd700;
+  --bg-skill: #020b1b;
+  --neon-glow: 0 0 8px rgba(255,255,0,0.8);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',sans-serif; }
+body, html { background:var(--black); color:var(--white); overflow-x:hidden; }
+
+/* ===== HERO ===== */
+section.hero { ... }
+section.hero::before { ... }
+section.hero .shape { ... }
+@keyframes rotateShape { ... }
+.hero-content { ... }
+.hero-content .profile-photo { ... }
+.hero-content h1 { ... }
+.hero-content p { ... }
+.hero-content .btn { ... }
+.hero-content .btn:hover { ... }
+
+/* ===== ABOUT ===== */
+section.about { ... }
+section.about h2 { ... }
+section.about p { ... }
+.about-shape1, .about-shape2 { ... }
+
+/* ===== SKILLS ===== */
+section.skills { ... }
+#skillCanvas { ... }
+section.skills h1 { ... }
+.skill-list { ... }
+.skill-item { ... }
+.skill-item:hover { ... }
+.skill-item span { ... }
+
+/* ===== VIDEOS ===== */
+section.videos { ... }
+section.videos h1 { ... }
+.video-section { ... }
+.video-card { ... }
+.video-card::before { ... }
+.video-card:hover { ... }
+.video-card iframe { ... }
+
+/* ===== CONTACT ===== */
+section.contact { ... }
+#bgCanvas, #confettiCanvas { ... }
+.contact-content { ... }
+.contact-content h1 { ... }
+.contact-content p { ... }
+.contact-content .buttons { ... }
+.contact-content a.button { ... }
+.contact-content a.button:hover { ... }
